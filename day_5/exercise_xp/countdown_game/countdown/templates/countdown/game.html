@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "partials/base.html" %}
+
+{% block content %}
+{% include 'partials/navbar.html' %}
+
+   <h2>Shuffled Word: {{ shuffled_word }}</h2>
+
+   <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h3>Guesses left: {{guesses_number}}</h3>
+        <h3>Total score: {{total_score}}</h3>
+        <button type="submit">Guess</button>
+   </form>
+{% if game_over %}
+
+    <h1>Game Over! Here's some data:</h1>
+        <ul>
+            <li>The Word was: {{game_over.host_word}}</li>
+            <li>Your Score: {{game_over.score}} </li>
+            <li>Your Total Score is: {{game_over.total_scrore}} </li>
+        </ul>
+
+
+{% endif %}
+{% endblock %}
+
+</body>
+</html>
